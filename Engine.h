@@ -11,7 +11,7 @@ protected:
 public:
 	static int KeyCode;
 
-	static UEngine* GetInstance()
+	inline static UEngine* GetInstance()
 	{
 		if (Instance == nullptr)
 		{

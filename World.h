@@ -24,6 +24,11 @@ public:
 	void Tick();
 	void Render();
 
+	inline std::vector<AActor*>& GetAllActorsOfClass()
+	{
+		return Actors;
+	}
+
 protected:
 	std::vector<AActor*> Actors;
 };
