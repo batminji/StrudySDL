@@ -11,6 +11,7 @@ public:
 	virtual ~UWorld();
 
 	void Load(const std::string MapName);
+	void Save();
 
 	template<typename ClassName>
 	AActor* SpawnActor()

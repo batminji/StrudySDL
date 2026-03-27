@@ -63,6 +63,15 @@ void UWorld::Load(const std::string MapName)
 	}
 }
 
+void UWorld::Save()
+{
+	std::vector<std::string> SaveMap;
+	for (auto Actor : Actors)
+	{
+
+	}
+}
+
 void UWorld::Tick()
 {
 	for (auto Actor : Actors)

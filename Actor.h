@@ -16,6 +16,10 @@ public:
 	virtual void Render();
 
 	void SetActorLocation(const FVector2D& NewLocation);
+	inline const FVector2D GetActorLocation() const
+	{
+		return Location;
+	}
 	void AddActorLocalOffset(const FVector2D& Offset);
 
 protected:
