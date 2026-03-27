@@ -3,7 +3,7 @@
 class AGoal : public AActor
 {
 public:
-	AGoal(const FVector2D& InLocation = { 0, 0 }, const char InMesh = 'G');
+	AGoal(const FVector2D& InLocation = { 0, 0 }, const char InMesh = 'G', const int InZOrder = 1);
 	virtual ~AGoal();
 };
 

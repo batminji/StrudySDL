@@ -5,4 +5,5 @@
 #include <conio.h>
 #include <fstream>
 #include <Windows.h>
+#include <algorithm>
 #include "FVector.h"

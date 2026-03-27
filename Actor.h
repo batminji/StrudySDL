@@ -3,7 +3,7 @@
 class AActor
 {
 public:
-	AActor(const FVector2D& InLocation = { 0, 0 }, const char InMesh = ' ');
+	AActor(const FVector2D& InLocation = { 0, 0 }, const char InMesh = ' ', const int InZorder = 0);
 	virtual ~AActor();
 
 	virtual void BeginPlay();
@@ -16,6 +16,11 @@ public:
 		return Location;
 	}
 	void AddActorLocalOffset(const FVector2D& Offset);
+
+	inline const int GetZOrder() const
+	{
+		return ZOrder;
+	}
 
 protected:
 	FVector2D Location;

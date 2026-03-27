@@ -64,6 +64,8 @@ void UWorld::Load(const std::string MapName)
 	}
 
 	MapStream.close();
+
+	SortActors();
 }
 
 void UWorld::Save(const std::string SaveFileName)
@@ -125,6 +127,14 @@ void UWorld::SaveActors(std::vector<std::string>& MapBuffer)
 			MapBuffer[Y][X] = 'G';
 		}
 	}
+}
+
+void UWorld::SortActors()
+{
+	std::sort(Actors.begin(), Actors.end(), [](const AActor* A, const AActor* B)
+		{
+			return ((A->GetZOrder() < B->GetZOrder()) ? true : false);
+		});
 }
 
 const FVector2D& UWorld::GetMaxMapSize() const

@@ -3,7 +3,7 @@
 class AFloor : public AActor
 {
 public:
-	AFloor(const FVector2D InLocation = {0, 0}, const char InMesh = ' ');
+	AFloor(const FVector2D InLocation = {0, 0}, const char InMesh = ' ', const int InZOrder = 0);
 	virtual ~AFloor();
 };
 

@@ -31,6 +31,7 @@ public:
 protected:
 	const FVector2D& GetMaxMapSize() const;
 	void SaveActors(std::vector<std::string>& MapBuffer);
+	void SortActors();
 
 	std::vector<AActor*> Actors;
 };

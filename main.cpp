@@ -9,7 +9,7 @@ int Ascending(const void* A, const void* B)
 
 int Desending(const void* A, const void* B)
 {
-	return (*(int*)A - *(int*)B > 0) ? -1 : 1;
+	return (*(int*)A - *(int*)B < 0) ? 1 : -1;
 }
 
 void Swap(void* A, void* B, size_t Size)
@@ -51,48 +51,35 @@ void SelectionSort(int* InData, int Size)
 	}
 }
 
-bool bConnected = true;
-
-int CompleteCallback()
-{
-	std::cout << "접속 완료" << std::endl;
-
-	return 1;
-}
-
-void PressKey(int(*Complete)())
-{
-	// CallBack
-	if (bConnected)
-	{
-		Complete();
-	}
-}
-
 int main()
 {
-	PressKey(CompleteCallback);
-
-	/*GEngine->GetWorld()->Load("NewLevel.txt");
+	GEngine->GetWorld()->Load("NewLevel.txt");
 
 	GEngine->Run();
 
-	delete GEngine;*/
+	delete GEngine;
 
-	int Data[15] = { 9, 1, 3, 5, 4, 6, 7, 8, 2, 10 , 15, 14, 13, 12, 11};
-	
-	// Sort(Data, 15, sizeof(int), Ascending);
-	// Sort(Data, 15, sizeof(int), Desending);
+	//int Data[15] = { 9, 1, 3, 5, 4, 6, 7, 8, 2, 10 , 15, 14, 13, 12, 11};
+	//
+	//// Sort(Data, 15, sizeof(int), Ascending);
+	//// Sort(Data, 15, sizeof(int), Desending);
 
-	Sort(Data, 15, sizeof(int), [](const void* A, const void* B) -> int
-		{
-			return (*(int*)A - *(int*)B > 0) ? 1 : -1;
-		});
+	//int Number = 0;
 
-	for (int i = 0; i < 15; ++i)
-	{
-		std::cout << Data[i] << " ";
-	}
+	//Sort(Data, 15, sizeof(int), [](const void* A, const void* B) -> int
+	//	{
+	//		return (*(int*)A - *(int*)B > 0) ? 1 : -1;
+	//	});
+
+	//Sort(Data, 15, sizeof(int), [](const void* A, const void* B) -> int
+	//	{
+	//		return (*(int*)A - *(int*)B < 0) ? 1 : -1;
+	//	});
+
+	//for (int i = 0; i < 15; ++i)
+	//{
+	//	std::cout << Data[i] << " ";
+	//}
 
 	return 0;
 }
