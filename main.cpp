@@ -4,20 +4,12 @@
 
 int Ascending(const void* A, const void* B)
 {
-	if (*(int*)A - *(int*)B > 0)
-		return 1;
-	if (*(int*)A - *(int*)B < 0)
-		return -1;
-	return 0;
+	return (*(int*)A - *(int*)B > 0) ? 1 : -1;
 }
 
 int Desending(const void* A, const void* B)
 {
-	if (*(int*)A - *(int*)B > 0)
-		return -1;
-	if (*(int*)A - *(int*)B < 0)
-		return 1;
-	return 0;
+	return (*(int*)A - *(int*)B > 0) ? -1 : 1;
 }
 
 void Swap(void* A, void* B, size_t Size)
@@ -69,7 +61,6 @@ int main()
 
 	int Data[10] = { 9, 1, 3, 5, 4, 6, 7, 8, 2, 10 };
 	
-	// SelectionSort(Data, 10);
 	// Sort(Data, 10, sizeof(int), Ascending);
 	Sort(Data, 10, sizeof(int), Desending);
 
