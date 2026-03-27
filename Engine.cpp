@@ -40,6 +40,10 @@ void UEngine::Run()
 void UEngine::Input()
 {
 	KeyCode = _getch();
+	if (KeyCode == 'f')
+	{
+		GEngine->GetWorld()->Save("SaveLevel.txt");
+	}
 }
 
 void UEngine::Tick()

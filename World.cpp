@@ -61,14 +61,25 @@ void UWorld::Load(const std::string MapName)
 		}
 		Y++;
 	}
+
+	MapStream.close();
 }
 
-void UWorld::Save()
+void UWorld::Save(const std::string SaveFileName)
 {
-	std::vector<std::string> SaveMap;
-	for (auto Actor : Actors)
-	{
+	FVector2D MaxSize = GetMaxMapSize();
 
+	std::vector<std::string> MapBuffer(MaxSize.Y + 1, std::string(MaxSize.X + 1, ' '));
+	SaveActors(MapBuffer);
+
+	std::ofstream MapStream(SaveFileName);
+	if (MapStream.is_open())
+	{
+		for (const std::string& Line : MapBuffer)
+		{
+			MapStream << Line << std::endl;
+		}
+		MapStream.close();
 	}
 }
 
@@ -86,4 +97,50 @@ void UWorld::Render()
 	{
 		Actor->Render();
 	}
+}
+
+void UWorld::SaveActors(std::vector<std::string>& MapBuffer)
+{
+	for (auto Actor : Actors)
+	{
+		FVector2D Location = Actor->GetActorLocation();
+		int X = Location.X;
+		int Y = Location.Y;
+
+		if (dynamic_cast<APlayer*>(Actor))
+		{
+			MapBuffer[Y][X] = 'P';
+		}
+		else if (dynamic_cast<AMonster*>(Actor))
+		{
+			MapBuffer[Y][X] = 'M';
+		}
+		else if (dynamic_cast<AWall*>(Actor))
+		{
+			MapBuffer[Y][X] = '#';
+		}
+		else if (dynamic_cast<AGoal*>(Actor))
+		{
+			MapBuffer[Y][X] = 'G';
+		}
+	}
+}
+
+const FVector2D& UWorld::GetMaxMapSize() const
+{
+	int MaxX = 0, MaxY = 0;
+	for (auto Actor : Actors)
+	{
+		FVector2D Location = Actor->GetActorLocation();
+		if (Location.X > MaxX)
+		{
+			MaxX = Location.X;
+		}
+		if (Location.Y > MaxY)
+		{
+			MaxY = Location.Y;
+		}
+	}
+
+	return { MaxX, MaxY };
 }

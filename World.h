@@ -9,7 +9,7 @@ public:
 	virtual ~UWorld();
 
 	void Load(const std::string MapName);
-	void Save();
+	void Save(const std::string SaveFileName);
 
 	template<typename ClassName>
 	AActor* SpawnActor()
@@ -29,6 +29,9 @@ public:
 	}
 
 protected:
+	const FVector2D& GetMaxMapSize() const;
+	void SaveActors(std::vector<std::string>& MapBuffer);
+
 	std::vector<AActor*> Actors;
 };
 
