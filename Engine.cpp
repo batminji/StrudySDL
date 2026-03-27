@@ -44,6 +44,10 @@ void UEngine::Input()
 	{
 		GEngine->GetWorld()->Save("SaveLevel.txt");
 	}
+	if (KeyCode == 'q')
+	{
+		bIsRunning = false;
+	}
 }
 
 void UEngine::Tick()
