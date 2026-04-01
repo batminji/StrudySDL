@@ -8,7 +8,6 @@ protected:
 	UEngine();
 
 public:
-	static int KeyCode;
 
 	inline static UEngine* GetInstance()
 	{
@@ -36,6 +35,11 @@ public:
 	void Render(const FVector2D& InLocation, int R, int G, int B);
 	void Flip();
 	void TermBuffer();
+
+	inline const SDL_Event& GetEvent()
+	{
+		return Event;
+	}
 
 protected:
 	void Input();

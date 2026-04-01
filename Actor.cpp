@@ -22,6 +22,8 @@ void AActor::Tick()
 
 void AActor::Render()
 {
+	GEngine->Render(Location, Mesh);
+
 	GEngine->Render(Location, ColorR, ColorG, ColorB);
 }
 

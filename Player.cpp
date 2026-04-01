@@ -18,27 +18,28 @@ APlayer::~APlayer()
 
 void APlayer::Tick()
 {
-	Move();
-}
+	__super::Tick();
 
-void APlayer::Move()
-{
-	switch (UEngine::KeyCode)
+	SDL_Event Event = GEngine->GetEvent();
+
+	if (Event.type == SDL_KEYDOWN)
 	{
-	case 'w':
-		AddActorLocalOffset({ 0, -1 });
-		break;
-	case 's':
-		AddActorLocalOffset({ 0, 1 });
-		break;
-	case 'a':
-		AddActorLocalOffset({ -1, 0 });
-		break;
-	case 'd':
-		AddActorLocalOffset({ 1, 0 });
-		break;
-	default:
-		break;
+		switch (Event.key.keysym.sym)
+		{
+		case SDLK_w:
+			AddActorLocalOffset({ 0, -1 });
+			break;
+		case SDLK_s:
+			AddActorLocalOffset({ 0, 1 });
+			break;
+		case SDLK_a:
+			AddActorLocalOffset({ -1, 0 });
+			break;
+		case SDLK_d:
+			AddActorLocalOffset({ 1, 0 });
+			break;
+		default:
+			break;
+		}
 	}
-	UEngine::KeyCode = 0;
 }

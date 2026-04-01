@@ -7,7 +7,5 @@ public:
 	virtual ~APlayer();
 
 	virtual void Tick() override;
-
-	void Move();
 };
 

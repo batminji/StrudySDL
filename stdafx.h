@@ -2,7 +2,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <conio.h>
 #include <fstream>
 #include <Windows.h>
 #include <algorithm>
@@ -17,10 +16,10 @@
 // Struct
 #include "FVector.h"
 
-#define WINDOWX 0
-#define WINDOWY 0
-#define WINDOWW 960
-#define WINDOWH 540
+#define WINDOWX 50
+#define WINDOWY 50
+#define WINDOWW 600
+#define WINDOWH 600
 
 //std::random_device RandomDevice;
 //std::default_random_engine dre(RandomDevice());

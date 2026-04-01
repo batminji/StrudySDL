@@ -2,8 +2,6 @@
 #include "Engine.h"
 #include "World.h"
 
-int UEngine::KeyCode = 0;
-
 UEngine::UEngine()
 {
 	Init();
@@ -102,18 +100,7 @@ void UEngine::TermBuffer()
 
 void UEngine::Input()
 {
-	if (_kbhit())
-	{
-		KeyCode = _getch();
-		if (KeyCode == 'f')
-		{
-			GEngine->GetWorld()->Save("SaveLevel.txt");
-		}
-		if (KeyCode == 'q')
-		{
-			bIsRunning = false;
-		}
-	}
+	
 }
 
 void UEngine::Tick()
