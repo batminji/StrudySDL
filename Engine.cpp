@@ -16,6 +16,10 @@ UEngine::~UEngine()
 
 void UEngine::Init()
 {
+	SDL_Init(SDL_INIT_EVERYTHING);
+	Window = SDL_CreateWindow("SDL Engine", WINDOWX, WINDOWY, WINDOWW, WINDOWH, SDL_WINDOW_SHOWN);
+	Renderer = SDL_CreateRenderer(Window, -1, 0);
+
 	bIsRunning = true;
 	World = new UWorld();
 
@@ -24,6 +28,10 @@ void UEngine::Init()
 
 void UEngine::Terminate()
 {
+	SDL_DestroyRenderer(Renderer);
+	SDL_DestroyWindow(Window);
+	SDL_Quit();
+
 	delete World;
 	World = nullptr;
 
@@ -34,6 +42,8 @@ void UEngine::Run()
 {
 	while (bIsRunning)
 	{
+		SDL_PollEvent(&Event);
+
 		Input();
 		Tick();
 		Render();
@@ -97,10 +107,26 @@ void UEngine::Input()
 
 void UEngine::Tick()
 {
+	switch (Event.type)
+	{
+	case SDL_QUIT:
+		bIsRunning = false;
+		break;
+	default:
+		break;
+	}
+
 	World->Tick();
 }
 
 void UEngine::Render()
 {
+	// Clear
+	SDL_SetRenderDrawColor(Renderer, 255, 255, 255, 255);
+	SDL_RenderClear(Renderer);
+
 	World->Render();
+
+	// Render CPU->GPU
+	SDL_RenderPresent(Renderer);
 }

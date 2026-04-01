@@ -45,6 +45,10 @@ protected:
 	bool bIsRunning : 1;
 
 	UWorld* World;
+
+	SDL_Window* Window;
+	SDL_Renderer* Renderer;
+	SDL_Event Event;
 };
 
 #define GEngine		UEngine::GetInstance()
