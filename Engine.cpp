@@ -17,6 +17,7 @@ void UEngine::Init()
 	SDL_Init(SDL_INIT_EVERYTHING);
 	Window = SDL_CreateWindow("SDL Engine", WINDOWX, WINDOWY, WINDOWW, WINDOWH, SDL_WINDOW_SHOWN);
 	Renderer = SDL_CreateRenderer(Window, -1, 0);
+	State = SDL_GetKeyboardState(NULL);
 
 	bIsRunning = true;
 	World = new UWorld();
@@ -110,16 +111,17 @@ void UEngine::Input()
 
 void UEngine::Tick()
 {
-	switch (Event.type)
+	if (Event.type == SDL_KEYDOWN)
 	{
-	case SDL_QUIT:
-		bIsRunning = false;
-		break;
-	case SDLK_ESCAPE:
-		bIsRunning = false;
-		break;
-	default:
-		break;
+		SDL_Keycode KeyCode = Event.key.keysym.sym;
+		if (KeyCode == SDL_QUIT)
+		{
+			bIsRunning = false;
+		}
+		if (KeyCode == SDLK_ESCAPE)
+		{
+			bIsRunning = false;
+		}
 	}
 
 	World->Tick();

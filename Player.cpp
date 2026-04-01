@@ -21,28 +21,25 @@ void APlayer::Tick()
 	__super::Tick();
 
 	SDL_Event Event = GEngine->GetEvent();
-
 	if (Event.type == SDL_KEYDOWN)
 	{
-		switch (Event.key.keysym.sym)
+		const Uint8* State = GEngine->GetState();
+
+		if (State[SDL_SCANCODE_UP] || State[SDL_SCANCODE_W])
 		{
-		case SDLK_w:
 			AddActorLocalOffset({ 0, -1 });
-			break;
-		case SDLK_s:
+		}
+		if (State[SDL_SCANCODE_DOWN] || State[SDL_SCANCODE_S])
+		{
 			AddActorLocalOffset({ 0, 1 });
-			break;
-		case SDLK_a:
+		}
+		if (State[SDL_SCANCODE_LEFT] || State[SDL_SCANCODE_A])
+		{
 			AddActorLocalOffset({ -1, 0 });
-			break;
-		case SDLK_d:
+		}
+		if (State[SDL_SCANCODE_RIGHT] || State[SDL_SCANCODE_D])
+		{
 			AddActorLocalOffset({ 1, 0 });
-			break;
-		case SDLK_ESCAPE:
-			GEngine->Stop();
-			break;
-		default:
-			break;
 		}
 	}
 }

@@ -42,6 +42,11 @@ public:
 		return Event;
 	}
 
+	inline const Uint8* GetState()
+	{
+		return State;
+	}
+
 protected:
 	void Input();
 	void Tick();
@@ -55,6 +60,7 @@ protected:
 	SDL_Window* Window;
 	SDL_Renderer* Renderer;
 	SDL_Event Event;
+	const Uint8* State;
 };
 
 #define GEngine		UEngine::GetInstance()
