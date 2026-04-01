@@ -11,8 +11,6 @@
 #define WINDOWW 640
 #define WINDOWH 480
 
-#define PI		3.141592
-
 std::random_device RandomDevice;
 std::default_random_engine dre(RandomDevice());
 
@@ -39,32 +37,97 @@ void DrawRect(SDL_Renderer* Renderer, Uint8 ColorR, Uint8 ColorG, Uint8 ColorB, 
 	}
 }
 
+void NewDrawCircle(SDL_Renderer* Renderer, Uint8 ColorR, Uint8 ColorG, Uint8 ColorB, int CenterX, int CenterY, int Radius, bool bIsFill)
+{
+	SDL_SetRenderDrawColor(Renderer, ColorR, ColorG, ColorB, 255);
+
+	for (int Theta = 0; Theta < 360; ++Theta)
+	{
+		float Radian = (float)Theta + 3.14f / 180.0f;
+		int X = 10 * SDL_cos(Theta) + CenterX;
+		int Y = 10 * SDL_sin(Theta) + CenterY;
+		SDL_RenderDrawPoint(Renderer, X, Y);
+	}
+}
+
+void DrawCircleTeacher(SDL_Renderer* Renderer)
+{
+	SDL_SetRenderDrawColor(Renderer, 255, 0, 0, 0);
+
+	int Radius = 200;
+	int CenterX = 500;
+	int CenterY = 500;
+	int Size = 15;
+
+	for (int Theta = 0; Theta <= 360; Theta += Size)
+	{
+		float Radian1 = (float)Theta * 3.141592f / 180.0f;
+		float Radian2 = (float)(Theta + Size) * 3.141592f / 180.0f;
+		int X1 = Radius * SDL_cos(Radian1) + CenterX;
+		int Y1 = Radius * SDL_sin(Radian1) + CenterY;
+		int X2 = Radius * SDL_cos(Radian2) + CenterX;
+		int Y2 = Radius * SDL_sin(Radian2) + CenterY;
+		//SDL_RenderDrawPoint(MyRender, X, Y);
+		SDL_RenderDrawLine(Renderer, X1, Y1, X2, Y2);
+	}
+}
+
 void DrawCircle(SDL_Renderer* Renderer, Uint8 ColorR, Uint8 ColorG, Uint8 ColorB, int CenterX, int CenterY, int Radius, bool bIsFill) {
 	SDL_SetRenderDrawColor(Renderer, ColorR, ColorG, ColorB, 255);
 
-	double Radian = PI / 180.0f;
+	for (int Y = -Radius; Y <= Radius; ++Y) {
+		for (int X = -Radius; X <= Radius; ++X) {
 
-	for (int angle = 0; angle < 360; ++angle) {
-		double CurrentRadian = angle * Radian;
+			int Distance = SDL_sqrt(X * X + Y * Y);
 
-		int X = static_cast<int>(Radius * cos(CurrentRadian));
-		int Y = static_cast<int>(Radius * sin(CurrentRadian));
-
-		if (bIsFill) 
-		{
-			SDL_RenderDrawLine(Renderer, CenterX, CenterY, CenterX + X, CenterY + Y);
-		}
-		else 
-		{
-			SDL_RenderDrawPoint(Renderer, CenterX + X, CenterY + Y);
+			if (bIsFill) {
+				if (Distance <= Radius) {
+					SDL_RenderDrawPoint(Renderer, CenterX + X, CenterY + Y);
+				}
+			}
+			else {
+				int InnerRadius = Radius - 1;
+				if (Distance <= Radius && Distance > InnerRadius) {
+					SDL_RenderDrawPoint(Renderer, CenterX + X, CenterY + Y);
+				}
+			}
 		}
 	}
 }
 
+void DrawWave(SDL_Renderer* Renderer, int CenterX, int CenterY, float Radius, float Time) {
+	float WaveFrequency = 10.0f;		// 파동의 빈도 (얼마나 촘촘한가)
+	float WaveSpeed = 30.0f;			// 파동의 속도
+	float WaveSharpness = 4.0f;			// 파동의 날카로움
+
+
+	for (int Y = -Radius; Y <= Radius; ++Y) {
+		for (int X = -Radius; X <= Radius; ++X) {
+			
+			float DX = (float)X / Radius;
+			float DY = (float)Y / Radius;
+			float Distance = SDL_sqrt(DX * DX + DY * DY);
+
+			if (Distance < 0.5f) {
+				float falloff = 2.0f * (0.5f - Distance);
+				falloff = SDL_max(0.0f, SDL_min(1.0f, falloff));
+
+				float WaveAngle = (Distance * WaveSharpness * M_PI * WaveFrequency) - (Time * WaveSpeed);
+				float WaveIntensity = falloff * sin(WaveAngle);
+
+				Uint8 ColorValue = static_cast<Uint8>((WaveIntensity * 0.5f + 0.5f) * 255);
+
+				SDL_SetRenderDrawColor(Renderer, ColorValue / 2, ColorValue / 2, ColorValue, 255);
+				SDL_RenderDrawPoint(Renderer, CenterX + X, CenterY + Y);
+			}
+		}
+	}
+}
 
 int SDL_main(int argc, char* argv[])
 {
 	bool bIsRunning = true;
+	float Time = 0.0f;
 
 	// Initialize
 	SDL_Init(SDL_INIT_EVERYTHING);			// `SDL_INIT_EVERYTHING`: all of the above subsystems
@@ -76,6 +139,8 @@ int SDL_main(int argc, char* argv[])
 	// Running
 	while (bIsRunning)
 	{
+		Time += 0.016f;
+
 		// Event Polling
 		SDL_Event Event;
 		SDL_PollEvent(&Event);
@@ -93,6 +158,7 @@ int SDL_main(int argc, char* argv[])
 		SDL_SetRenderDrawColor(Renderer, 255, 255, 255, 255);
 		SDL_RenderClear(Renderer);
 
+		DrawWave(Renderer, WINDOWW / 2, WINDOWH / 2, 400.0f, Time);
 
 		// Draw Rects
 		int RectCounts = 0;
@@ -113,7 +179,7 @@ int SDL_main(int argc, char* argv[])
 		}
 		
 		// Draw Circle
-		int CircleCounts = 100;
+		int CircleCounts = 0;
 		for (int i = 0; i < CircleCounts; ++i)
 		{
 			Uint8 ColorR = uidR(dre);
@@ -127,9 +193,10 @@ int SDL_main(int argc, char* argv[])
 			bool bIsFill = rand() % 2;
 
 			DrawCircle(Renderer, ColorR, ColorG, ColorB, CenterX, CenterY, Radius, bIsFill);
+			//DrawCircle(Renderer, 255, 0, 0, 100, 100, 100, 50, false);
 		}
 
-		// Render
+		// Render CPU -> GPU
 		SDL_RenderPresent(Renderer);
 	}
 
