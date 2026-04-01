@@ -6,6 +6,22 @@
 #pragma comment(lib, "SDL2")
 #pragma comment(lib, "SDL2main")
 
+#define WINDOWW 640
+#define WINDOWH 480
+
+void DrawRect(SDL_Renderer* Renderer, Uint8 ColorR, Uint8 ColorG, Uint8 ColorB, int RectX, int RectY, int RectW, int RectH, bool bIsFill)
+{
+	SDL_SetRenderDrawColor(Renderer, ColorR, ColorG, ColorB, 255);
+	SDL_Rect Rect = { RectX, RectY, RectW, RectH };
+	if (bIsFill)
+	{
+		SDL_RenderFillRect(Renderer, &Rect);
+	}
+	else {
+		SDL_RenderDrawRect(Renderer, &Rect);
+	}
+}
+
 int SDL_main(int argc, char* argv[])
 {
 	bool bIsRunning = true;
@@ -13,7 +29,7 @@ int SDL_main(int argc, char* argv[])
 	// Initialize
 	SDL_Init(SDL_INIT_EVERYTHING);			// `SDL_INIT_EVERYTHING`: all of the above subsystems
 	// Create Window
-	SDL_Window* Window = SDL_CreateWindow("SDL Engine", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
+	SDL_Window* Window = SDL_CreateWindow("SDL Engine", 100, 100, WINDOWW, WINDOWH, SDL_WINDOW_SHOWN);
 	// Create Renderer
 	SDL_Renderer* Renderer = SDL_CreateRenderer(Window, -1, 0);
 	
@@ -37,32 +53,30 @@ int SDL_main(int argc, char* argv[])
 		SDL_SetRenderDrawColor(Renderer, 255, 255, 255, 255);
 		SDL_RenderClear(Renderer);
 
-		int RectCounts = 100;
-		SDL_Rect* Rects = new SDL_Rect[RectCounts];
 
+		// Draw Rects
+		int RectCounts = 100;
 		for (int i = 0; i < RectCounts; ++i)
 		{
 			Uint8 ColorR = rand() % 255 + 1;
 			Uint8 ColorG = rand() % 255 + 1;
 			Uint8 ColorB = rand() % 255 + 1;
-			SDL_SetRenderDrawColor(Renderer, ColorR, ColorG, ColorB, 255);
 
-			int RectX = rand() % 640;
-			int RectY = rand() % 480;
+			int RectX = rand() % WINDOWW;
+			int RectY = rand() % WINDOWH;
 			int RectW = rand() % 100 + 1;
 			int RectH = rand() % 100 + 1;
-			SDL_Rect Rect = { RectX, RectY, RectW, RectH };
 
 			int Fill = rand() % 2;
-			if (Fill)
-			{
-				SDL_RenderFillRect(Renderer, &Rect);
-			}			
-
-			SDL_RenderDrawRect(Renderer, &Rect);
+			
+			DrawRect(Renderer, ColorR, ColorG, ColorB, RectX, RectY, RectW, RectH, Fill);
 		}
 		
-		delete[] Rects;
+
+		// Render Circle
+		int CenterX = rand() % WINDOWW;
+		int CenterY = rand() % WINDOWH;
+		int Radius = rand() % 100 + 1;
 
 		// Render
 		SDL_RenderPresent(Renderer);
