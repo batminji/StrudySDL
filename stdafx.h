@@ -6,4 +6,10 @@
 #include <fstream>
 #include <Windows.h>
 #include <algorithm>
+
+// SDL
+#include "SDL.h"
+#include "SDL_main.h"
+
+// Struct
 #include "FVector.h"
