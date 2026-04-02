@@ -45,6 +45,9 @@
     <ClInclude Include="FVector.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameplayStatics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -78,6 +81,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FVector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameplayStatics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

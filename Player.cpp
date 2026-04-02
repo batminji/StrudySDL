@@ -21,25 +21,32 @@ void APlayer::Tick()
 	__super::Tick();
 
 	SDL_Event Event = GEngine->GetEvent();
+
+	FVector2D Offset{ 0, 0 };
 	if (Event.type == SDL_KEYDOWN)
 	{
 		const Uint8* State = GEngine->GetState();
 
 		if (State[SDL_SCANCODE_UP] || State[SDL_SCANCODE_W])
 		{
-			AddActorLocalOffset({ 0, -1 });
+			Offset.Y--;
 		}
 		if (State[SDL_SCANCODE_DOWN] || State[SDL_SCANCODE_S])
 		{
-			AddActorLocalOffset({ 0, 1 });
+			Offset.Y++;
 		}
 		if (State[SDL_SCANCODE_LEFT] || State[SDL_SCANCODE_A])
 		{
-			AddActorLocalOffset({ -1, 0 });
+			Offset.X--;
 		}
 		if (State[SDL_SCANCODE_RIGHT] || State[SDL_SCANCODE_D])
 		{
-			AddActorLocalOffset({ 1, 0 });
+			Offset.X++;
 		}
+	}
+
+	if (Offset.X != 0 || Offset.Y != 0)
+	{
+		AddActorLocalOffset(Offset);
 	}
 }

@@ -16,7 +16,8 @@ void UEngine::Init()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	Window = SDL_CreateWindow("SDL Engine", WINDOWX, WINDOWY, WINDOWW, WINDOWH, SDL_WINDOW_SHOWN);
-	Renderer = SDL_CreateRenderer(Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	Renderer = SDL_CreateRenderer(Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
+
 	State = SDL_GetKeyboardState(NULL);
 
 	bIsRunning = true;
@@ -39,13 +40,9 @@ void UEngine::Terminate()
 
 void UEngine::Run()
 {
-	LastTime = SDL_GetTicks();
-
 	while (bIsRunning)
 	{
-		CurrentTime = SDL_GetTicks();
-		DeltaSeconds = (CurrentTime - LastTime) / 1000.0f;
-		LastTime = CurrentTime;
+		LastTime = SDL_GetTicks();
 
 		SDL_PollEvent(&Event);
 
@@ -53,11 +50,9 @@ void UEngine::Run()
 		Tick();
 		Render();
 
-		FrameTime = SDL_GetTicks() - CurrentTime;
-		if (FrameDelay > FrameTime) 
-		{
-			SDL_Delay(FrameDelay - FrameTime);
-		}
+		DeltaSeconds = (float)(SDL_GetTicks() - LastTime) / 1000.f;
+
+		// SDL_Log("%f", DeltaSeconds);
 	}
 }
 
@@ -68,29 +63,36 @@ void UEngine::Stop()
 
 void UEngine::InitBuffer()
 {
-	ScreenBufferHandle[0] = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
-	ScreenBufferHandle[1] = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
-
-	CONSOLE_CURSOR_INFO ConsoleCursorInfo;
-	ConsoleCursorInfo.dwSize = 1;
-	ConsoleCursorInfo.bVisible = FALSE;
-	SetConsoleCursorInfo(ScreenBufferHandle[0], &ConsoleCursorInfo);
-	SetConsoleCursorInfo(ScreenBufferHandle[1], &ConsoleCursorInfo);
+	// Console Double Buffuring
+	// ScreenBufferHandle[0] = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
+	// ScreenBufferHandle[1] = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
+	// 
+	// CONSOLE_CURSOR_INFO ConsoleCursorInfo;
+	// ConsoleCursorInfo.dwSize = 1;
+	// ConsoleCursorInfo.bVisible = FALSE;
+	// SetConsoleCursorInfo(ScreenBufferHandle[0], &ConsoleCursorInfo);
+	// SetConsoleCursorInfo(ScreenBufferHandle[1], &ConsoleCursorInfo);
 }
 
 void UEngine::Clear()
 {
-	DWORD DW;
-	FillConsoleOutputCharacter(ScreenBufferHandle[ActiveScreenBufferIndex], ' ', 80 * 25, COORD{0, 0}, &DW);
+	// Clear
+	SDL_SetRenderDrawColor(Renderer, 255, 255, 255, 255);
+	SDL_RenderClear(Renderer);
+
+	// Console Clear
+	// DWORD DW;
+	// FillConsoleOutputCharacter(ScreenBufferHandle[ActiveScreenBufferIndex], ' ', 80 * 25, COORD{0, 0}, &DW);
 }
 
 void UEngine::Render(const FVector2D& InLocation, const char InMesh)
 {
-	char MeshString[2] = { 0, };
-	MeshString[0] = InMesh;
-
-	SetConsoleCursorPosition(ScreenBufferHandle[ActiveScreenBufferIndex], COORD{(short)(InLocation.X * 2), (short)InLocation.Y});
-	WriteFile(ScreenBufferHandle[ActiveScreenBufferIndex], MeshString, 1, NULL, NULL);
+	// Console Render
+	// char MeshString[2] = { 0, };
+	// MeshString[0] = InMesh;
+	// 
+	// SetConsoleCursorPosition(ScreenBufferHandle[ActiveScreenBufferIndex], COORD{(short)(InLocation.X * 2), (short)InLocation.Y});
+	// WriteFile(ScreenBufferHandle[ActiveScreenBufferIndex], MeshString, 1, NULL, NULL);
 }
 
 void UEngine::Render(const FVector2D& InLocation, int InColorR, int InColorG, int InColorB)
@@ -106,14 +108,15 @@ void UEngine::Render(const FVector2D& InLocation, int InColorR, int InColorG, in
 
 void UEngine::Flip()
 {
-	SetConsoleActiveScreenBuffer(ScreenBufferHandle[ActiveScreenBufferIndex]);
-	ActiveScreenBufferIndex = !ActiveScreenBufferIndex;
+	// Buffer Flip
+	// SetConsoleActiveScreenBuffer(ScreenBufferHandle[ActiveScreenBufferIndex]);
+	// ActiveScreenBufferIndex = !ActiveScreenBufferIndex;
 }
 
 void UEngine::TermBuffer()
 {
-	CloseHandle(ScreenBufferHandle[0]);
-	CloseHandle(ScreenBufferHandle[1]);
+	// CloseHandle(ScreenBufferHandle[0]);
+	// CloseHandle(ScreenBufferHandle[1]);
 }
 
 void UEngine::Input()
@@ -141,10 +144,6 @@ void UEngine::Tick()
 
 void UEngine::Render()
 {
-	// Clear
-	SDL_SetRenderDrawColor(Renderer, 255, 255, 255, 255);
-	SDL_RenderClear(Renderer);
-
 	World->Render();
 
 	// Render CPU->GPU
