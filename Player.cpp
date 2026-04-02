@@ -57,11 +57,12 @@ void APlayer::Tick()
 		AddActorLocalOffset(Offset);
 	}
 
-	Sprite += GEngine->GetDeltaSeconds();
-	if (Sprite >= 5.0f)
+	DeltaSeconds += GEngine->GetDeltaSeconds();
+	if (DeltaSeconds >= 0.1f)
 	{
-		Sprite = 0.0f;
+		SpriteIndex = ++SpriteIndex % 5;
+		DeltaSeconds = 0.0f;
 	}
 
-	TextureLocation = { (int)Sprite, Direction};
+	TextureLocation = { SpriteIndex, Direction};
 }

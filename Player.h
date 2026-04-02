@@ -10,6 +10,7 @@ public:
 
 protected:
 	int Direction = 3;
-	float Sprite = 0;
+	float DeltaSeconds = 0.0f;
+	int SpriteIndex = 0;
 };
 
