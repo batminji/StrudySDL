@@ -2,6 +2,7 @@
 #include "Monster.h"
 #include "Engine.h"
 #include "ResourceManager.h"
+#include "SpriteComponent.h"
 
 AMonster::AMonster(const FVector2D& InLocation, const char InMesh)
 {
@@ -10,10 +11,15 @@ AMonster::AMonster(const FVector2D& InLocation, const char InMesh)
 
 	Direction = rand() % 4;
 
-	// MyResource = GEngine->GetResourceManager()->LoadTexture("Data/monster.bmp", true, 255, 255, 255);
-	// 
-	// TextureLocation = { 0, 0 };
-	// TextureSize = { MyResource->Image->w, MyResource->Image->h };
+	SpriteComponent = CreateDefaultSubObject<USpriteComponent>("Sprite");
+
+	Resource* MyResource = GEngine->GetResourceManager()->LoadTexture("Data/monster.bmp", true, 255, 255, 255);
+	SpriteComponent->MyResource = MyResource;
+
+	SpriteComponent->TextureLocation = { 0, 0 };
+	SpriteComponent->TextureSize = { MyResource->Image->w, MyResource->Image->h };
+
+	SpriteComponent->ZOrder = 20;
 }
 
 AMonster::~AMonster()

@@ -82,7 +82,43 @@ void UWorld::Load(const std::string MapName)
 
 	MapStream.close();
 
-	SortActors();
+	// SortActors();
+	std::sort(Actors.begin(), Actors.end(),
+		[](AActor* First, AActor* Second) -> int {
+
+			USpriteComponent* FirstRenderComponent = nullptr;
+			for (auto Component : First->Components)
+			{
+				FirstRenderComponent = dynamic_cast<USpriteComponent*>(Component);
+				if (FirstRenderComponent)
+				{
+					break;
+				}
+			}
+
+			if (!FirstRenderComponent)
+			{
+				return 0;
+			}
+
+			USpriteComponent* SecondRenderComponent = nullptr;
+			for (auto Component : Second->Components)
+			{
+				SecondRenderComponent = dynamic_cast<USpriteComponent*>(Component);
+				if (SecondRenderComponent)
+				{
+					break;
+				}
+			}
+
+			if (!SecondRenderComponent)
+			{
+				return 0;
+			}
+
+			return (FirstRenderComponent->ZOrder < SecondRenderComponent->ZOrder ? 1 : 0);
+		}
+	);
 }
 
 void UWorld::Save(const std::string SaveFileName)

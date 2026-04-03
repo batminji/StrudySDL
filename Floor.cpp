@@ -16,6 +16,7 @@ AFloor::AFloor(const FVector2D& InLocation, const char InMesh)
 
 	SpriteComponent->TextureLocation = { 0, 0 };
 	SpriteComponent->TextureSize = { MyResource->Image->w, MyResource->Image->h };
+	SpriteComponent->ZOrder = 0;
 }
 
 AFloor::~AFloor()

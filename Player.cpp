@@ -3,16 +3,21 @@
 #include "Engine.h"
 #include "ResourceManager.h"
 #include "GameplayStatics.h"
+#include "SpriteComponent.h"
 
 APlayer::APlayer(const FVector2D& InLocation, const char InMesh)
 {
 	Location = InLocation;
 	Mesh = InMesh;
 
-	// MyResource = GEngine->GetResourceManager()->LoadTexture("Data/player.bmp", true, 255, 0, 255);
-	// 
-	// TextureLocation = { 0, 0 };
-	// TextureSize = { MyResource->Image->w / 5, MyResource->Image->h / 5 };
+	SpriteComponent = CreateDefaultSubObject<USpriteComponent>("Sprite");
+
+	Resource* MyResource = GEngine->GetResourceManager()->LoadTexture("Data/player.bmp", true, 255, 0, 255);
+	SpriteComponent->MyResource = MyResource;
+
+	SpriteComponent->TextureLocation = { 0, 0 };
+	SpriteComponent->TextureSize = { MyResource->Image->w / 5, MyResource->Image->h / 5};
+	SpriteComponent->ZOrder = 100;
 }
 
 APlayer::~APlayer()
@@ -64,5 +69,5 @@ void APlayer::Tick()
 		DeltaSeconds = 0.0f;
 	}
 
-	// TextureLocation = { SpriteIndex, Direction };
+	TextureLocation = { SpriteIndex, Direction };
 }
