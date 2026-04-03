@@ -23,7 +23,7 @@ AMonster::AMonster(const FVector2D& InLocation, const char InMesh)
 
 	// Collision Component
 	CollisionComponent = CreateDefaultSubObject<UCollisionComponent>("Collision");
-	CollisionComponent->SetbIsGenerateHit(true);
+	CollisionComponent->SetbIsGenerateHit(false);
 	CollisionComponent->SetbIsGenerateOverlap(true);
 }
 

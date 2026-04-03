@@ -25,11 +25,11 @@ bool ACharacter::PredictMove(FVector2D InLocation)
 			UCollisionComponent* OtherCollision = dynamic_cast<UCollisionComponent*>(OtherComponent);
 			if (OtherCollision)
 			{
-				if (OtherCollision->GetbIsGenerateOverlap() && InLocation.X == Other->GetActorLocation().X && InLocation.Y == Other->GetActorLocation().Y)
+				/*if (OtherCollision->GetbIsGenerateOverlap() && InLocation.X == Other->GetActorLocation().X && InLocation.Y == Other->GetActorLocation().Y)
 				{
 					ProcessBeginOverlap(Other);
 					return true;
-				}
+				}*/
 				if (OtherCollision->GetbIsGenerateHit() && InLocation.X == Other->GetActorLocation().X && InLocation.Y == Other->GetActorLocation().Y)
 				{
 					ReceiveHit(Other);

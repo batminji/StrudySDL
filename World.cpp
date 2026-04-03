@@ -28,9 +28,14 @@ UWorld::~UWorld()
 	Actors.clear();
 }
 
+void UWorld::SetGameMode(AGameMode* NewGameMode)
+{
+	Actors.emplace_back(NewGameMode);
+}
+
 void UWorld::Load(const std::string MapName)
 {
-	Actors.emplace_back(new AGameMode());
+	// Actors.emplace_back(new AGameMode());
 
 	std::ifstream MapStream(MapName);
 
@@ -139,6 +144,14 @@ void UWorld::Save(const std::string SaveFileName)
 			MapStream << Line << std::endl;
 		}
 		MapStream.close();
+	}
+}
+
+void UWorld::BeginPlay()
+{
+	for (auto Actor : Actors)
+	{
+		Actor->BeginPlay();
 	}
 }
 

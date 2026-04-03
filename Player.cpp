@@ -6,6 +6,9 @@
 #include "GameplayStatics.h"
 #include "SpriteAnimationComponent.h"
 #include "CollisionComponent.h"
+#include "Goal.h"
+#include "MyGM.h"
+#include "Monster.h"
 
 APlayer::APlayer(const FVector2D& InLocation, const char InMesh)
 {
@@ -36,11 +39,27 @@ void APlayer::BeginPlay()
 {
 	__super::BeginPlay();
 
-	// OnActorBeginOverlap = [&](AActor* Other) {
-	// 
-	// 	};
-	// 
-	// OnActorBeginOverlap = &APlayer::ProcessBeginOverlap;
+	OnActorBeginOverlap = [&](AActor* Other) -> void {
+		AGoal* Goal = dynamic_cast<AGoal*>(Other);
+		if (Goal)
+		{
+			AMyGM* GM = dynamic_cast<AMyGM*>(UGameplayStatics::GetGameMode());
+			if (GM)
+			{
+				GM->GameComplete();
+			}
+		}
+
+		AMonster* Monster = dynamic_cast<AMonster*>(Other);
+		if (Monster)
+		{
+			AMyGM* GM = dynamic_cast<AMyGM*>(UGameplayStatics::GetGameMode());
+			if (GM)
+			{
+				GM->GameOver();
+			}
+		}
+	};
 }
 
 void APlayer::Tick()

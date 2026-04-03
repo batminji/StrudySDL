@@ -47,6 +47,8 @@ void UEngine::Terminate()
 
 void UEngine::Run()
 {
+	World->BeginPlay();
+
 	while (bIsRunning)
 	{
 		LastTime = SDL_GetTicks();

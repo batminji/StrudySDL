@@ -29,6 +29,7 @@ public:
 		return bIsGenerateHit;
 	}
 
+
 protected:
 	int bIsGenerateOverlap : 1;
 

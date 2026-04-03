@@ -2,6 +2,7 @@
 #include "Actor.h"
 
 class USpriteComponent;
+class UCollisionComponent;
 
 class AGoal : public AActor
 {
@@ -11,5 +12,6 @@ public:
 	
 protected:
 	USpriteComponent* SpriteComponent;
+	UCollisionComponent* CollisionComponent;
 };
 

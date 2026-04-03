@@ -1,12 +1,15 @@
 #pragma once
 
 class AActor;
+class AGameMode;
 
 class UWorld
 {
 public:
 	UWorld();
 	virtual ~UWorld();
+
+	void SetGameMode(AGameMode* NewGameMode);
 
 	void Load(const std::string MapName);
 	void Save(const std::string SaveFileName);
@@ -20,6 +23,7 @@ public:
 		return NewActor;
 	}
 
+	void BeginPlay();
 	void Tick();
 	void Render();
 
