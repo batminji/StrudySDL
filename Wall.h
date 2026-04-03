@@ -3,7 +3,7 @@
 class AWall : public AActor
 {
 public:
-	AWall(const FVector2D& InLocation = {0, 0}, int InColorR = 0, int InColorG = 255, int InColorB = 0, const char InMesh = '#', const int InZOrder = 1);
+	AWall(const FVector2D& InLocation = { 0, 0 }, const char InMesh = ' ');
 	virtual ~AWall();
 };
 

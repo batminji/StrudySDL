@@ -3,7 +3,7 @@
 class APlayer : public AActor
 {
 public:
-	APlayer(const FVector2D& InLocation = {0, 0}, int InColorR = 255, int InColorG = 255, int InColorB = 255, const char InMesh = 'P', const int InZOrder = '3');
+	APlayer(const FVector2D& InLocation = { 0, 0 }, const char InMesh = ' ');
 	virtual ~APlayer();
 
 	virtual void Tick() override;

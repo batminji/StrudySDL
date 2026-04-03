@@ -2,20 +2,20 @@
 #include "Floor.h"
 #include "Engine.h"
 #include "ResourceManager.h"
+#include "SpriteComponent.h"
 
-AFloor::AFloor(const FVector2D InLocation, int InColorR, int InColorG, int InColorB, const char InMesh, const int InZOrder)
+AFloor::AFloor(const FVector2D& InLocation, const char InMesh)
 {
 	Location = InLocation;
 	Mesh = InMesh;
-	ZOrder = InZOrder;
-	ColorR = InColorR;
-	ColorG = InColorG;
-	ColorB = InColorB;
 
-	MyResource = GEngine->GetResourceManager()->LoadTexture("Data/floor.bmp");
+	SpriteComponent = CreateDefaultSubObject<USpriteComponent>("Sprite");
 
-	TextureLocation = { 0, 0 };
-	TextureSize = { MyResource->Image->w, MyResource->Image->h };
+	Resource* MyResource = GEngine->GetResourceManager()->LoadTexture("Data/floor.bmp");
+	SpriteComponent->MyResource = MyResource;
+
+	SpriteComponent->TextureLocation = { 0, 0 };
+	SpriteComponent->TextureSize = { MyResource->Image->w, MyResource->Image->h };
 }
 
 AFloor::~AFloor()

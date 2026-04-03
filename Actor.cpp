@@ -2,8 +2,8 @@
 #include "Actor.h"
 #include "Engine.h"
 
-AActor::AActor(const FVector2D& InLocation, int InColorR, int InColorG, int InColorB, const char InMesh, const int InZOrder)
-	: Location(InLocation), ColorR(InColorR), ColorG(InColorG), ColorB(InColorB), Mesh(InMesh), ZOrder(InZOrder)
+AActor::AActor(const FVector2D& InLocation, const char InMesh)
+	: Location(InLocation), Mesh(InMesh)
 {
 }
 
@@ -19,17 +19,6 @@ void AActor::Tick()
 {
 }
 
-void AActor::Render()
-{
-	// Console Render
-	// GEngine->Render(Location, Mesh);
-
-	// SDL Render Rect
-	// GEngine->Render(Location, ColorR, ColorG, ColorB);
-
-	// SDL Render Texture
-	GEngine->Render(Location, MyResource->Texture, TextureLocation, TextureSize);
-}
 
 void AActor::SetActorLocation(const FVector2D& NewLocation)
 {

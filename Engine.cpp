@@ -111,7 +111,7 @@ void UEngine::Render(const FVector2D& InLocation, int InColorR, int InColorG, in
 	SDL_RenderFillRect(Renderer, &Rect);
 }
 
-void UEngine::Render(const FVector2D& InLocation, SDL_Texture* InTexture, FVector2D& InTextureLocation, FVector2D& InTextureSize)
+void UEngine::Render(const FVector2D& InLocation, SDL_Texture* InTexture, const FVector2D& InTextureLocation, const FVector2D& InTextureSize)
 {
 	SDL_Rect SRCRect = { InTextureLocation.X * InTextureSize.X, InTextureLocation.Y * InTextureSize.Y, InTextureSize.X, InTextureSize.Y };
 	SDL_Rect DSTRect = { InLocation.X * TileSize, InLocation.Y * TileSize, TileSize, TileSize };

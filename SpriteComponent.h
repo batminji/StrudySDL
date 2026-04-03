@@ -12,5 +12,14 @@ public:
 	virtual void Tick() override;
 
 	virtual void Render() override;
+
+	int ZOrder;
+
+	FVector2D Location;
+
+	Resource* MyResource;
+	 
+	FVector2D TextureLocation;
+	FVector2D TextureSize;
 };
 

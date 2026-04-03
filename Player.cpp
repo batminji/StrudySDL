@@ -4,19 +4,15 @@
 #include "ResourceManager.h"
 #include "GameplayStatics.h"
 
-APlayer::APlayer(const FVector2D& InLocation, int InColorR, int InColorG, int InColorB, char InMesh, const int InZOrder)
+APlayer::APlayer(const FVector2D& InLocation, const char InMesh)
 {
 	Location = InLocation;
 	Mesh = InMesh;
-	ZOrder = InZOrder;
-	ColorR = InColorR;
-	ColorG = InColorG;
-	ColorB = InColorB;
 
-	MyResource = GEngine->GetResourceManager()->LoadTexture("Data/player.bmp", true, 255, 0, 255);
-
-	TextureLocation = { 0, 0 };
-	TextureSize = { MyResource->Image->w / 5, MyResource->Image->h / 5 };
+	// MyResource = GEngine->GetResourceManager()->LoadTexture("Data/player.bmp", true, 255, 0, 255);
+	// 
+	// TextureLocation = { 0, 0 };
+	// TextureSize = { MyResource->Image->w / 5, MyResource->Image->h / 5 };
 }
 
 APlayer::~APlayer()
@@ -68,5 +64,5 @@ void APlayer::Tick()
 		DeltaSeconds = 0.0f;
 	}
 
-	TextureLocation = { SpriteIndex, Direction };
+	// TextureLocation = { SpriteIndex, Direction };
 }

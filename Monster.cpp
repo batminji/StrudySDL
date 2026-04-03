@@ -3,21 +3,17 @@
 #include "Engine.h"
 #include "ResourceManager.h"
 
-AMonster::AMonster(const FVector2D& InLocation, int InColorR, int InColorG, int InColorB, const char InMesh, const int InZOrder)
+AMonster::AMonster(const FVector2D& InLocation, const char InMesh)
 {
 	Location = InLocation;
 	Mesh = InMesh;
-	ZOrder = InZOrder;
-	ColorR = InColorR;
-	ColorG = InColorG;
-	ColorB = InColorB;
 
 	Direction = rand() % 4;
 
-	MyResource = GEngine->GetResourceManager()->LoadTexture("Data/monster.bmp", true, 255, 255, 255);
-
-	TextureLocation = { 0, 0 };
-	TextureSize = { MyResource->Image->w, MyResource->Image->h };
+	// MyResource = GEngine->GetResourceManager()->LoadTexture("Data/monster.bmp", true, 255, 255, 255);
+	// 
+	// TextureLocation = { 0, 0 };
+	// TextureSize = { MyResource->Image->w, MyResource->Image->h };
 }
 
 AMonster::~AMonster()

@@ -7,5 +7,7 @@ public:
 
 	virtual void BeginPlay() = 0;
 	virtual void Tick() = 0;
+
+	class AActor* Owner;
 };
 

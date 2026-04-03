@@ -9,6 +9,10 @@
 #include "Floor.h"
 #include "Goal.h"
 
+#include "Component.h"
+#include "SpriteComponent.h"
+#include "RenderableComponent.h"
+
 UWorld::UWorld()
 {
 
@@ -111,9 +115,17 @@ void UWorld::Render()
 {
 	GEngine->Clear();
 
+	// 모든 Actor 중에서, Render 가능한 Component가 있으면 Render
 	for (auto Actor : Actors)
-	{
-		Actor->Render();
+	{		
+		for (auto Component : Actor->Components)
+		{
+			USpriteComponent* RenderComponent = dynamic_cast<USpriteComponent*>(Component);
+			if (RenderComponent)
+			{
+				RenderComponent->Render();
+			}
+		}
 	}
 
 	GEngine->Flip();
@@ -148,10 +160,11 @@ void UWorld::SaveActors(std::vector<std::string>& MapBuffer)
 
 void UWorld::SortActors()
 {
-	std::sort(Actors.begin(), Actors.end(), [](const AActor* A, const AActor* B)
-		{
-			return ((A->GetZOrder() < B->GetZOrder()) ? true : false);
-		});
+	//std::sort(Actors.begin(), Actors.end(), [](const AActor* A, const AActor* B)
+	//	{
+	//		// return ((A->GetZOrder() < B->GetZOrder()) ? true : false);
+	//		return 1;
+	//	});
 }
 
 const FVector2D& UWorld::GetMaxMapSize() const
