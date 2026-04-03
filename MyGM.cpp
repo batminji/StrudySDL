@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MyGM.h"
+#include "Engine.h"
 
 AMyGM::AMyGM()
 {
@@ -15,7 +16,7 @@ void AMyGM::GameOver()
 
 	if (!bGameOver)
 	{
-		SDL_Log("Game Over");
+		GEngine->SetPrintString("Game Over");
 		bGameOver = true;
 	}
 }
@@ -26,7 +27,7 @@ void AMyGM::GameComplete()
 
 	if (!bGameComplte)
 	{
-		SDL_Log("Game Complete");
+		GEngine->SetPrintString("Game Complete");
 
 		bGameComplte = true;
 	}

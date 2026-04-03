@@ -16,10 +16,14 @@ UEngine::~UEngine()
 void UEngine::Init()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
+	TTF_Init(); // TTF
 	Window = SDL_CreateWindow("SDL Engine", WINDOWX, WINDOWY, WINDOWW, WINDOWH, SDL_WINDOW_SHOWN);
 	Renderer = SDL_CreateRenderer(Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
 
 	State = SDL_GetKeyboardState(NULL);
+
+	Font = TTF_OpenFont("arial.ttf", 24);
+
 
 	ResourceManager = new UResourceManager();
 
@@ -160,6 +164,13 @@ void UEngine::Render()
 {
 	World->Render();
 
-	// Render CPU->GPU
+	// Font Ãâ·Â
+	SDL_Color Color = { 255, 0, 255, 255 }; // Èò»ö
+	SDL_Surface* FontSurface = TTF_RenderText_Solid(Font, PrintString.c_str(), Color);
+	SDL_Texture* FontTexture = SDL_CreateTextureFromSurface(Renderer, FontSurface);
+	SDL_Rect textRect = { 200, 0, 20 * PrintString.length(), 50};
+
+	SDL_RenderCopy(Renderer, FontTexture, NULL, &textRect);
+
 	SDL_RenderPresent(Renderer);
 }

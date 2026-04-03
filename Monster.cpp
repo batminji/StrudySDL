@@ -79,5 +79,5 @@ void AMonster::ReceiveHit(AActor* OtherActor)
 
 void AMonster::ProcessBeginOverlap(AActor* OtherActor)
 {
-	SDL_Log("Monster Collide Player");
+	GEngine->SetPrintString("Monster Collide Player");
 }

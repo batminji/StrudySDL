@@ -119,7 +119,7 @@ void APlayer::Tick()
 
 void APlayer::ReceiveHit(AActor* OtherActor)
 {
-
+	// GEngine->SetPrintString("Game Complete");
 }
 
 void APlayer::ProcessBeginOverlap(AActor* OtherActor)
