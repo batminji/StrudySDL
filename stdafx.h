@@ -11,8 +11,10 @@
 
 // SDL
 #include "SDL.h"
+#include "SDL_ttf.h"
 #include "SDL_main.h"
 #pragma comment(lib, "SDL2")
+#pragma comment(lib, "SDL2_ttf.lib")
 #pragma comment(lib, "SDL2main")
 
 // Struct
