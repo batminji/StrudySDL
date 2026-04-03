@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)SDL2_ttf\include;$(SolutionDir)SDL2\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)SDL2_ttf\lib\x64;$(SolutionDir)SDL2\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)SDL2_mixer\include;$(SolutionDir)SDL2_ttf\include;$(SolutionDir)SDL2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)SDL2_mixer\lib\x64;$(SolutionDir)SDL2_ttf\lib\x64;$(SolutionDir)SDL2\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>C:\Minji\L20260327\SDL2\include;$(IncludePath)</IncludePath>
@@ -117,7 +117,8 @@
     </Link>
     <PostBuildEvent>
       <Command>copy $(SolutionDir)SDL2\lib\x64\SDL2.dll $(OutputPath)SDL2.dll
-copy $(SolutionDir)SDL2_ttf\lib\x64\SDL2_ttf.dll $(OutputPath)SDL2_ttf.dll</Command>
+copy $(SolutionDir)SDL2_ttf\lib\x64\SDL2_ttf.dll $(OutputPath)SDL2_ttf.dll
+copy $(SolutionDir)SDL2_mixer\lib\x64\SDL2_mixer.dll $(OutputPath)SDL2_mixer.dll</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
