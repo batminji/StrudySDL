@@ -14,16 +14,14 @@ AWall::AWall(const FVector2D& InLocation, const char InMesh)
 	SpriteComponent = CreateDefaultSubObject<USpriteComponent>("Sprite");
 
 	Resource* MyResource = GEngine->GetResourceManager()->LoadTexture("Data/wall.bmp");
-	SpriteComponent->MyResource = MyResource;
-
-	SpriteComponent->TextureSize = { MyResource->Image->w, MyResource->Image->h };
-
-	SpriteComponent->ZOrder = 5;
+	SpriteComponent->SetResource(MyResource);
+	SpriteComponent->SetTextureSize({ MyResource->Image->w, MyResource->Image->h });
+	SpriteComponent->SetZOrder(5);
 
 	// Collision Component
 	CollisionComponent = CreateDefaultSubObject<UCollisionComponent>("Collision");
-	CollisionComponent->bIsGenerateHit = true;
-	CollisionComponent->bIsGenerateOverlap = false;
+	CollisionComponent->SetbIsGenerateHit(true);
+	CollisionComponent->SetbIsGenerateOverlap(true);
 }
 
 AWall::~AWall()

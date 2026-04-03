@@ -41,7 +41,7 @@ protected:
 	T* CreateDefaultSubObject(std::string ComponentName)
 	{
 		T* Temp = new T;
-		Temp->Owner = this;
+		Temp->SetOwner(this);
 		Components.push_back(Temp);
 
 		return Temp;

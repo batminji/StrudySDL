@@ -119,7 +119,7 @@ void UWorld::Load(const std::string MapName)
 				return 0;
 			}
 
-			return (FirstRenderComponent->ZOrder < SecondRenderComponent->ZOrder ? 1 : 0);
+			return (FirstRenderComponent->GetZOrder() < SecondRenderComponent->GetZOrder() ? 1 : 0);
 		}
 	);
 }

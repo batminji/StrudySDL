@@ -17,16 +17,14 @@ AMonster::AMonster(const FVector2D& InLocation, const char InMesh)
 	SpriteComponent = CreateDefaultSubObject<USpriteComponent>("Sprite");
 
 	Resource* MyResource = GEngine->GetResourceManager()->LoadTexture("Data/monster.bmp", true, 255, 255, 255);
-	SpriteComponent->MyResource = MyResource;
-
-	SpriteComponent->TextureSize = { MyResource->Image->w, MyResource->Image->h };
-
-	SpriteComponent->ZOrder = 20;
+	SpriteComponent->SetResource(MyResource);
+	SpriteComponent->SetTextureSize({ MyResource->Image->w, MyResource->Image->h });
+	SpriteComponent->SetZOrder(20);
 
 	// Collision Component
 	CollisionComponent = CreateDefaultSubObject<UCollisionComponent>("Collision");
-	CollisionComponent->bIsGenerateHit = true;
-	CollisionComponent->bIsGenerateOverlap = true;
+	CollisionComponent->SetbIsGenerateHit(true);
+	CollisionComponent->SetbIsGenerateOverlap(true);
 }
 
 AMonster::~AMonster()

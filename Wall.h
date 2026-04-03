@@ -10,6 +10,7 @@ public:
 	AWall(const FVector2D& InLocation = { 0, 0 }, const char InMesh = ' ');
 	virtual ~AWall();
 
+protected:
 	USpriteComponent* SpriteComponent;
 	UCollisionComponent* CollisionComponent;
 };

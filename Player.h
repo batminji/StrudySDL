@@ -13,6 +13,7 @@ public:
 	virtual void BeginPlay() override;
 	virtual void Tick() override;
 
+protected:
 	USpriteAnimationComponent* SpriteAnimationComponent;
 	UCollisionComponent* CollisionComponent;
 

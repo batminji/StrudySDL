@@ -16,16 +16,16 @@ APlayer::APlayer(const FVector2D& InLocation, const char InMesh)
 	SpriteAnimationComponent = CreateDefaultSubObject<USpriteAnimationComponent>("Sprite");
 
 	Resource* MyResource = GEngine->GetResourceManager()->LoadTexture("Data/player.bmp", true, 255, 0, 255);
-	SpriteAnimationComponent->MyResource = MyResource;
 
-	SpriteAnimationComponent->TextureLocation = { 0, 0 };
-	SpriteAnimationComponent->TextureSize = { MyResource->Image->w / 5, MyResource->Image->h / 5};
-	SpriteAnimationComponent->ZOrder = 100;
+	SpriteAnimationComponent->SetResource(MyResource);
+	SpriteAnimationComponent->SetTextureLocation({ 0, 0 });
+	SpriteAnimationComponent->SetTextureSize({ MyResource->Image->w / 5, MyResource->Image->h / 5 });
+	SpriteAnimationComponent->SetZOrder(100);
 
 	// Collision Component
 	CollisionComponent = CreateDefaultSubObject<UCollisionComponent>("Collision");
-	CollisionComponent->bIsGenerateHit = true;
-	CollisionComponent->bIsGenerateOverlap = true;
+	CollisionComponent->SetbIsGenerateHit(true);
+	CollisionComponent->SetbIsGenerateOverlap(true);
 }
 
 APlayer::~APlayer()

@@ -12,6 +12,7 @@ public:
 
 	virtual void Tick() override;
 
+protected:
 	USpriteComponent* SpriteComponent;
 	UCollisionComponent* CollisionComponent;
 

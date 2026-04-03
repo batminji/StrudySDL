@@ -36,7 +36,6 @@ public:
 
 	void Render(const FVector2D& InLocation, const char InMesh);
 	void Render(const FVector2D& InLocation, int R, int G, int B);
-
 	void Render(const FVector2D& InLocation, SDL_Texture* InTexture, const FVector2D& InTextureLocation, const FVector2D& InTextureSize);
 
 	void Flip();
