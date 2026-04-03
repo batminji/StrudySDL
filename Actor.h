@@ -2,6 +2,8 @@
 
 class UComponent;
 
+using FActorBeginOverlapSignature = std::function<void(class AActor*)>;
+
 class AActor
 {
 public:
@@ -25,6 +27,8 @@ public:
 	void AddActorLocalOffset(const FVector2D& Offset);
 
 	std::vector<UComponent*> Components;
+
+	FActorBeginOverlapSignature OnActorBeginOverlap;
 
 protected:
 	FVector2D Location;

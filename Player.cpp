@@ -24,6 +24,15 @@ APlayer::~APlayer()
 {
 }
 
+void APlayer::BeginPlay()
+{
+	__super::BeginPlay();
+
+	OnActorBeginOverlap = [&](AActor* Other) {
+
+		};
+}
+
 void APlayer::Tick()
 {
 	__super::Tick();
@@ -70,4 +79,9 @@ void APlayer::Tick()
 	}
 
 	TextureLocation = { SpriteIndex, Direction };
+}
+
+void APlayer::ProcessBeginOverlap(AActor* OtherActor)
+{
+
 }

@@ -11,7 +11,14 @@ USpriteAnimationComponent::~USpriteAnimationComponent()
 {
 }
 
+void USpriteAnimationComponent::Tick()
+{
+	__super::Tick();
+	
+	TextureLocation = Owner->GetActorTextureLocation();
+}
+
 void USpriteAnimationComponent::Render()
 {
-	GEngine->Render(Owner->GetActorLocation(), MyResource->Texture, Owner->GetActorTextureLocation(), TextureSize);
+	GEngine->Render(Owner->GetActorLocation(), MyResource->Texture, TextureLocation, TextureSize);
 }

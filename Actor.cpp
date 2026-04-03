@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Actor.h"
 #include "Engine.h"
+#include "Component.h"
 
 AActor::AActor(const FVector2D& InLocation, const char InMesh)
 	: Location(InLocation), Mesh(InMesh)
@@ -9,6 +10,11 @@ AActor::AActor(const FVector2D& InLocation, const char InMesh)
 
 AActor::~AActor()
 {
+	for (auto Component : Components)
+	{
+		delete Component;
+	}
+	Components.clear();
 }
 
 void AActor::BeginPlay()
@@ -17,6 +23,10 @@ void AActor::BeginPlay()
 
 void AActor::Tick()
 {
+	for (auto Component : Components)
+	{
+		Component->Tick();
+	}
 }
 
 

@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <random>
 #include <map>
+#include <functional>
 
 // SDL
 #include "SDL.h"
