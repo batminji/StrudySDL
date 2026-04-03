@@ -156,7 +156,7 @@ void UWorld::Render()
 	{		
 		for (auto Component : Actor->Components)
 		{
-			USpriteComponent* RenderComponent = dynamic_cast<USpriteComponent*>(Component);
+			IRenderableComponent* RenderComponent = dynamic_cast<IRenderableComponent*>(Component);
 			if (RenderComponent)
 			{
 				RenderComponent->Render();

@@ -40,3 +40,8 @@ void AActor::AddActorLocalOffset(const FVector2D& Offset)
 	Location.X += Offset.X;
 	Location.Y += Offset.Y;
 }
+
+void AActor::ReceiveHit(AActor* Other)
+{
+
+}

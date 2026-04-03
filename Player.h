@@ -2,6 +2,7 @@
 #include "Actor.h"
 
 class USpriteAnimationComponent;
+class UCollisionComponent;
 
 class APlayer : public AActor
 {
@@ -13,6 +14,9 @@ public:
 	virtual void Tick() override;
 
 	USpriteAnimationComponent* SpriteAnimationComponent;
+	UCollisionComponent* CollisionComponent;
+
+	virtual void ReceiveHit(AActor* OtherActor) override;
 
 	void ProcessBeginOverlap(class AActor* OtherActor);
 
@@ -20,5 +24,7 @@ protected:
 	int Direction = 3;
 	float DeltaSeconds = 0.0f;
 	int SpriteIndex = 0;
+
+	bool PredictMovement(FVector2D InLocation); // Movement Component로 만들어야 함
 };
 

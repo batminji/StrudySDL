@@ -1,15 +1,18 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "Engine.h"
+#include "World.h"
 #include "ResourceManager.h"
 #include "GameplayStatics.h"
 #include "SpriteAnimationComponent.h"
+#include "CollisionComponent.h"
 
 APlayer::APlayer(const FVector2D& InLocation, const char InMesh)
 {
 	Location = InLocation;
 	Mesh = InMesh;
 
+	// Sprite Animation Component
 	SpriteAnimationComponent = CreateDefaultSubObject<USpriteAnimationComponent>("Sprite");
 
 	Resource* MyResource = GEngine->GetResourceManager()->LoadTexture("Data/player.bmp", true, 255, 0, 255);
@@ -18,6 +21,11 @@ APlayer::APlayer(const FVector2D& InLocation, const char InMesh)
 	SpriteAnimationComponent->TextureLocation = { 0, 0 };
 	SpriteAnimationComponent->TextureSize = { MyResource->Image->w / 5, MyResource->Image->h / 5};
 	SpriteAnimationComponent->ZOrder = 100;
+
+	// Collision Component
+	CollisionComponent = CreateDefaultSubObject<UCollisionComponent>("Collision");
+	CollisionComponent->bIsGenerateHit = true;
+	CollisionComponent->bIsGenerateOverlap = true;
 }
 
 APlayer::~APlayer()
@@ -28,9 +36,11 @@ void APlayer::BeginPlay()
 {
 	__super::BeginPlay();
 
-	OnActorBeginOverlap = [&](AActor* Other) {
-
-		};
+	// OnActorBeginOverlap = [&](AActor* Other) {
+	// 
+	// 	};
+	// 
+	// OnActorBeginOverlap = &APlayer::ProcessBeginOverlap;
 }
 
 void APlayer::Tick()
@@ -69,6 +79,12 @@ void APlayer::Tick()
 	if (Offset.X != 0 || Offset.Y != 0)
 	{
 		AddActorLocalOffset(Offset);
+		if (!PredictMovement(Location))
+		{
+			Offset.X = Offset.X * -1;
+			Offset.Y = Offset.Y * -1;
+			AddActorLocalOffset(Offset);
+		}
 	}
 
 	DeltaSeconds += UGameplayStatics::GetWorldDeltaSeconds();
@@ -81,7 +97,36 @@ void APlayer::Tick()
 	TextureLocation = { SpriteIndex, Direction };
 }
 
+void APlayer::ReceiveHit(AActor* OtherActor)
+{
+
+}
+
 void APlayer::ProcessBeginOverlap(AActor* OtherActor)
 {
 
+}
+
+bool APlayer::PredictMovement(FVector2D InLocation)
+{
+	for (auto Other : GEngine->GetWorld()->GetAllActorsOfClass()) 
+	{
+		for (auto OtherComponent : Other->Components)
+		{
+			UCollisionComponent* OtherCollision = dynamic_cast<UCollisionComponent*>(OtherComponent);
+			if (OtherCollision)
+			{
+				if (OtherCollision->Owner == this)
+				{
+					return true;
+				}
+				if (OtherCollision->bIsGenerateHit && InLocation.X == Other->GetActorLocation().X && InLocation.Y == Other->GetActorLocation().Y)
+				{
+					ReceiveHit(Other);
+					return false;
+				}
+			}
+		}
+	}
+	return true;
 }

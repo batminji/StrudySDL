@@ -30,6 +30,8 @@ public:
 
 	FActorBeginOverlapSignature OnActorBeginOverlap;
 
+	virtual void ReceiveHit(AActor* Other);
+
 protected:
 	FVector2D Location;
 	FVector2D TextureLocation;

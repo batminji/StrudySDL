@@ -2,6 +2,7 @@
 #include "Actor.h"
 
 class USpriteComponent;
+class UCollisionComponent;
 
 class AWall : public AActor
 {
@@ -10,5 +11,6 @@ public:
 	virtual ~AWall();
 
 	USpriteComponent* SpriteComponent;
+	UCollisionComponent* CollisionComponent;
 };
 

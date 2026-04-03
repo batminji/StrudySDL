@@ -2,7 +2,7 @@
 #include "Component.h"
 #include "RenderableComponent.h"
 
-class USpriteComponent : public UComponent, IRenderableComponent
+class USpriteComponent : public UComponent, public IRenderableComponent
 {
 public:
 	USpriteComponent();
