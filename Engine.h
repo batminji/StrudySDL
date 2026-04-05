@@ -88,8 +88,6 @@ protected:
 	SDL_Event Event;
 	const Uint8* State;
 
-	Mix_Music* BGM;
-
 	Uint32 LastTime;
 	float DeltaSeconds;
 

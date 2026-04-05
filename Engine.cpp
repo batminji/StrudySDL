@@ -16,14 +16,16 @@ UEngine::~UEngine()
 void UEngine::Init()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
+	// TTF Init
 	TTF_Init();
+	// BGM Init
+	Mix_Init(MIX_INIT_MP3 | MIX_INIT_OGG);
+	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+
 	Window = SDL_CreateWindow("SDL Engine", WINDOWX, WINDOWY, WINDOWW, WINDOWH, SDL_WINDOW_SHOWN);
 	Renderer = SDL_CreateRenderer(Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
 
 	State = SDL_GetKeyboardState(NULL);
-
-	BGM = Mix_LoadMUS("Data/bgm.mp3");
-	Mix_PlayMusic(BGM, -1);
 
 	ResourceManager = new UResourceManager();
 
@@ -38,7 +40,6 @@ void UEngine::Terminate()
 {
 	SDL_DestroyRenderer(Renderer);
 	SDL_DestroyWindow(Window);
-	Mix_FreeMusic(BGM);
 	SDL_Quit();
 
 	delete World;
