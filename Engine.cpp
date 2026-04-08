@@ -18,6 +18,7 @@ void UEngine::Init()
 	SDL_Init(SDL_INIT_EVERYTHING);
 	// TTF Init
 	TTF_Init();
+	Font = TTF_OpenFont("/Data/Font_arial.ttf", 32);
 	// BGM Init
 	Mix_Init(MIX_INIT_MP3 | MIX_INIT_OGG);
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
@@ -38,12 +39,20 @@ void UEngine::Init()
 
 void UEngine::Terminate()
 {
+	// 리소스 매니저로 바꿔야 함
+	if (Font)
+	{
+		TTF_CloseFont(Font);
+	}
+	TTF_Quit();	
+
 	SDL_DestroyRenderer(Renderer);
 	SDL_DestroyWindow(Window);
 	SDL_Quit();
 
 	delete World;
 	World = nullptr;
+
 
 	delete ResourceManager;
 	ResourceManager = nullptr;

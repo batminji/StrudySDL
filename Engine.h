@@ -72,6 +72,10 @@ public:
 		return ResourceManager;
 	}
 
+	inline TTF_Font* GetFont() const
+	{
+		return Font;
+	}
 protected:
 	void Input();
 	void Tick();
@@ -85,6 +89,9 @@ protected:
 
 	SDL_Window* Window;
 	SDL_Renderer* Renderer;
+
+	TTF_Font* Font;
+
 	SDL_Event Event;
 	const Uint8* State;
 

@@ -10,9 +10,9 @@ UResourceManager::~UResourceManager()
 {
 	for (auto Resource : Resources)
 	{
-		if (Resource.second.Image)
+		if (Resource.second.Surface)
 		{
-			SDL_FreeSurface(Resource.second.Image);
+			SDL_FreeSurface(Resource.second.Surface);
 		}
 		if (Resource.second.Texture)
 		{
@@ -28,16 +28,16 @@ Resource* UResourceManager::LoadTexture(std::string FileName, bool bIsColorKey, 
 	if (Resources.find(FileName) == Resources.end())
 	{
 		Resource NewResource;
-		NewResource.Image = SDL_LoadBMP(FileName.c_str());
+		NewResource.Surface = SDL_LoadBMP(FileName.c_str());
 
 		if (bIsColorKey)
 		{
-			Uint32 ColorKey = SDL_MapRGB(NewResource.Image->format, InColorR, InColorG, InColorB);
+			Uint32 ColorKey = SDL_MapRGB(NewResource.Surface->format, InColorR, InColorG, InColorB);
 
-			SDL_SetColorKey(NewResource.Image, SDL_TRUE, ColorKey);
+			SDL_SetColorKey(NewResource.Surface, SDL_TRUE, ColorKey);
 		}
 
-		NewResource.Texture = SDL_CreateTextureFromSurface(GEngine->GetRenderer(), NewResource.Image);
+		NewResource.Texture = SDL_CreateTextureFromSurface(GEngine->GetRenderer(), NewResource.Surface);
 		Resources[FileName] = NewResource;
 	}	
 

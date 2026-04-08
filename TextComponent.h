@@ -12,7 +12,6 @@ public:
 	virtual void Tick() override;
 	virtual void Render() override;
 
-	void SetFont(const std::string& InFontPath, int InFontSize);
 	void SetText(const std::string& InText);
 
 	inline void SetColor(SDL_Color InColor)
@@ -34,10 +33,8 @@ protected:
 	SDL_Color Color;
 	FVector2D Offset;
 
-	TTF_Font* MyFont;
 	Resource* MyResource;
-
-	FVector2D TextureSize;
+	void ResetResource();
 
 	int ZOrder;
 

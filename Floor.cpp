@@ -14,7 +14,7 @@ AFloor::AFloor(const FVector2D& InLocation, const char InMesh)
 
 	Resource* MyResource = GEngine->GetResourceManager()->LoadTexture("Data/floor.bmp");
 	SpriteComponent->SetResource(MyResource);
-	SpriteComponent->SetTextureSize({ MyResource->Image->w, MyResource->Image->h });
+	SpriteComponent->SetTextureSize({ MyResource->Surface->w, MyResource->Surface->h });
 	SpriteComponent->SetZOrder(0);
 }
 

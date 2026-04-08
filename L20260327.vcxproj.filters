@@ -93,10 +93,16 @@
     <ClInclude Include="MyGM.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BGMComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
     <ClInclude Include="TextComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TextRenderActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BGMComponent.h">
+    <ClInclude Include="YoudieActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -161,10 +167,16 @@
     <ClCompile Include="MyGM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BGMComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
     <ClCompile Include="TextComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TextRenderActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BGMComponent.cpp">
+    <ClCompile Include="YoudieActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

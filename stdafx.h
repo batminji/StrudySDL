@@ -12,11 +12,11 @@
 // SDL
 #include "SDL.h"
 #include "SDL_ttf.h"
-#include <SDL_mixer.h>
+#include "SDL_mixer.h"
 #include "SDL_main.h"
 #pragma comment(lib, "SDL2")
-#pragma comment(lib, "SDL2_ttf.lib")
-#pragma comment(lib, "SDL2_mixer.lib")
+#pragma comment(lib, "SDL2_ttf")
+#pragma comment(lib, "SDL2_mixer")
 #pragma comment(lib, "SDL2main")
 
 // Struct
@@ -42,6 +42,6 @@
 
 struct Resource
 {
-	SDL_Surface* Image;
+	SDL_Surface* Surface;
 	SDL_Texture* Texture;
 };

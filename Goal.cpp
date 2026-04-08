@@ -16,7 +16,7 @@ AGoal::AGoal(const FVector2D& InLocation, const char InMesh)
 
 	Resource* MyResource = GEngine->GetResourceManager()->LoadTexture("Data/Goal.bmp", true, 255, 255, 255);
 	SpriteComponent->SetResource(MyResource);
-	SpriteComponent->SetTextureSize({ MyResource->Image->w, MyResource->Image->h });
+	SpriteComponent->SetTextureSize({ MyResource->Surface->w, MyResource->Surface->h });
 	SpriteComponent->SetZOrder(10);
 
 	// Collision Component

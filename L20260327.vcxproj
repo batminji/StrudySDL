@@ -117,8 +117,8 @@
     </Link>
     <PostBuildEvent>
       <Command>copy $(SolutionDir)SDL2\lib\x64\SDL2.dll $(OutputPath)SDL2.dll
-copy $(SolutionDir)SDL2_ttf\lib\x64\SDL2_ttf.dll $(OutputPath)SDL2_ttf.dll
-copy $(SolutionDir)SDL2_mixer\lib\x64\SDL2_mixer.dll $(OutputPath)SDL2_mixer.dll</Command>
+copy $(SolutionDir)SDL2_ttf\lib\x64\*.dll $(OutputPath)\.
+copy $(SolutionDir)SDL2_mixer\lib\x64\*.dll $(OutputPath)\.</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -160,8 +160,10 @@ copy $(SolutionDir)SDL2_mixer\lib\x64\SDL2_mixer.dll $(OutputPath)SDL2_mixer.dll
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TextComponent.cpp" />
+    <ClCompile Include="TextRenderActor.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="World.cpp" />
+    <ClCompile Include="YoudieActor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
@@ -184,8 +186,10 @@ copy $(SolutionDir)SDL2_mixer\lib\x64\SDL2_mixer.dll $(OutputPath)SDL2_mixer.dll
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TextComponent.h" />
+    <ClInclude Include="TextRenderActor.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="World.h" />
+    <ClInclude Include="YoudieActor.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="NewLevel.txt" />

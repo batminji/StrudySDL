@@ -24,7 +24,7 @@ APlayer::APlayer(const FVector2D& InLocation, const char InMesh)
 
 	SpriteAnimationComponent->SetResource(MyResource);
 	SpriteAnimationComponent->SetTextureLocation({ 0, 0 });
-	SpriteAnimationComponent->SetTextureSize({ MyResource->Image->w / 5, MyResource->Image->h / 5 });
+	SpriteAnimationComponent->SetTextureSize({ MyResource->Surface->w / 5, MyResource->Surface->h / 5 });
 	SpriteAnimationComponent->SetZOrder(100);
 
 	// Collision Component
@@ -34,7 +34,6 @@ APlayer::APlayer(const FVector2D& InLocation, const char InMesh)
 
 	// Text Component
 	TextComponent = CreateDefaultSubObject<UTextComponent>("Text");
-	TextComponent->SetFont("arial.ttf", 24);
 	TextComponent->SetText("Player 1");
 	TextComponent->SetColor({ 255, 0, 255, 255 });
 	TextComponent->SetOffset({ 0, -1 });;
