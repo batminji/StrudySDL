@@ -76,6 +76,11 @@ public:
 	{
 		return Font;
 	}
+
+	inline int GetMixOpenAudio() const
+	{
+		return MixOpenAudio;
+	}
 protected:
 	void Input();
 	void Tick();
@@ -99,6 +104,8 @@ protected:
 	float DeltaSeconds;
 
 	UResourceManager* ResourceManager;
+
+	int MixOpenAudio = -1;
 };
 
 #define GEngine		UEngine::GetInstance()

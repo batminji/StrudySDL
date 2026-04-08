@@ -90,7 +90,10 @@ void UWorld::Load(const std::string MapName)
 
 	// Text Render Ãß°¡
 	SpawnActor<AYoudieActor>();
-	SpawnActor<ABGActor>();
+	if (GEngine->GetMixOpenAudio() != -1)
+	{
+		SpawnActor<ABGActor>();
+	}
 	
 	MapStream.close();
 

@@ -5,7 +5,7 @@
 ABGActor::ABGActor()
 {
 	Audio = CreateDefaultSubObject<UAudioComponent>("Audio");
-	Audio->Load("/Data/bgm.mp3");
+	Audio->Load("./Data/bgm.mp3");
 }
 
 ABGActor::~ABGActor()
