@@ -79,7 +79,7 @@ public:
 
 	inline int GetMixOpenAudio() const
 	{
-		return MixOpenAudio;
+		return AudioSuccess;
 	}
 protected:
 	void Input();
@@ -105,7 +105,7 @@ protected:
 
 	UResourceManager* ResourceManager;
 
-	int MixOpenAudio = -1;
+	int AudioSuccess = -1;
 };
 
 #define GEngine		UEngine::GetInstance()

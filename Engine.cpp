@@ -21,13 +21,17 @@ void UEngine::Init()
 	Font = TTF_OpenFont("./Data/Font_arial.ttf", 32);
 	// BGM Init
 	Mix_Init(MIX_INIT_MP3 | MIX_INIT_OGG);
+
+	// char* Device;
+	// int Result = Mix_OpenAudioDevice(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096, Device, SDL_AUDIO_ALLOW_ANY_CHANGE);
+
 	int Frequency = 0;
 	Uint16 Format = 0;
 	int Channels = 0;
-	int Result = Mix_QuerySpec(&Frequency, &Format, &Channels); // 질의
-	if (Result)
+	int AudioQueryResult = Mix_QuerySpec(&Frequency, &Format, &Channels); // 질의
+	if (AudioQueryResult)
 	{
-		MixOpenAudio = Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 512);
+		AudioSuccess = Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 512);
 	}
 	
 	Window = SDL_CreateWindow("SDL Engine", WINDOWX, WINDOWY, WINDOWW, WINDOWH, SDL_WINDOW_SHOWN);
